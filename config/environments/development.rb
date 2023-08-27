@@ -32,6 +32,9 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  # リダイレクトを許可する
+  config.action_controller.raise_on_open_redirects = false
+
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
