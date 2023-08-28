@@ -54,6 +54,7 @@ group :development, :test do
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
   gem 'letter_opener_web', '~> 2.0'
+  gem 'dotenv-rails'
 end
 
 group :development do
