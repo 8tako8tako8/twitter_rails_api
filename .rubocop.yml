@@ -4,7 +4,21 @@ require:
   - rubocop-hc
 Style/Documentation:
   Enabled: false
-AllCops:
-  NewCops: enable
+Metrics/MethodLength:
+  Max: 15
+  Exclude:
+    - "db/migrate/*"
+Metrics/AbcSize:
+  Max: 55
+  Exclude:
+    - "db/migrate/*"
+Layout/LineLength:
+  Max: 200
+Metrics/BlockLength:
+  Exclude:
+    - "config/environments/*"
+    - "db/seeds.rb"
+RSpec/ContextWording:
+  Enabled: false
 RSpec/MultipleExpectations:
-  Max: 2
+  Enabled: false
