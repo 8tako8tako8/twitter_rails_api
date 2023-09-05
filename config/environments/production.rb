@@ -41,7 +41,7 @@ Rails.application.configure do
   # config.action_cable.allowed_request_origins = [ "http://example.com", /http:\/\/example.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
+  config.force_ssl = true
 
   # Include generic and useful information about system operation, but avoid logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII).
@@ -49,6 +49,9 @@ Rails.application.configure do
 
   # Prepend all log lines with the following tags.
   config.log_tags = [:request_id]
+
+  # リダイレクトを許可する
+  config.action_controller.raise_on_open_redirects = false
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -58,6 +61,21 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "myapp_production"
 
   config.action_mailer.perform_caching = false
+
+  config.action_mailer.default_url_options = { host: 'twitter-rails-api1-a77730c5e74f.herokuapp.com', protocl: 'https' }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default charset: 'utf-8'
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.sendgrid.net',
+    port: 587,
+    domain: 'heroku.com',
+    user_name: 'apikey',
+    password: ENV.fetch('SENDGRID_APIKEY', nil),
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

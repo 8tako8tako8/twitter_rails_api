@@ -13,6 +13,8 @@ module Myapp
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
+    config.i18n.default_locale = :ja
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
@@ -25,6 +27,10 @@ module Myapp
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.session_store :cookie_store, key: '_interslice_session'
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use config.session_store, config.session_options
 
     config.generators do |g|
       g.test_framework :rspec,
