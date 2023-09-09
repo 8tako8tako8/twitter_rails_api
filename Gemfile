@@ -17,6 +17,9 @@ gem 'puma', '~> 5.0'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+# Use Japanese Language
+gem 'rails-i18n'
+
 # Use Pagination
 gem 'kaminari'
 
