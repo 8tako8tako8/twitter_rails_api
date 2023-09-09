@@ -57,6 +57,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'letter_opener_web', '~> 2.0'
   gem 'rspec-rails'
+  gem 'rspec-request_describer'
   gem 'rubocop', require: false
   gem 'rubocop-hc', require: false, github: 'ihatov08/rubocop-hc'
   gem 'rubocop-rails', require: false
