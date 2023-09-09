@@ -1,8 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Api::V1::Tweets", type: :request do
+RSpec.describe 'Api::V1::Tweets', type: :request do
   describe 'GET /api/v1/tweets' do
-    let!(:tweets) { FactoryBot.create_list(:tweet, 20) }
+    before do
+      FactoryBot.create_list(:tweet, 20)
+    end
 
     it 'ツイートの一覧が取得できること' do
       subject
