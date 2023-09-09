@@ -6,11 +6,11 @@ module Api
       include Pagination
 
       def index
-        page = params[:page].presence || 1
-        per = params[:per].presence || 10
+        offset = params[:offset].presence || 1
+        limit = params[:limit].presence || 10
         tweets = Tweet.order(created_at: :desc, id: :desc)
 
-        @tweets_paginated = tweets.page(page).per(per)
+        @tweets_paginated = tweets.page(offset).per(limit)
         @pagination = pagination(@tweets_paginated)
       end
     end
