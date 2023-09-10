@@ -30,7 +30,8 @@ RSpec.describe 'Api::V1::Tweets', type: :request do
   end
 
   describe 'POST /api/v1/tweets' do
-    subject { post(api_v1_tweets_path, headers: headers, params: params) }
+    subject { post(api_v1_tweets_path, headers:, params:) }
+
     let!(:user) { FactoryBot.create(:user) }
     let!(:params) { { tweet: 'テストツイート' } }
 
