@@ -9,10 +9,16 @@ module Api
       def index
         offset = params[:offset].presence || 1
         limit = params[:limit].presence || 10
-        tweets = Tweet.order(created_at: :desc, id: :desc)
+        all_tweets = Tweet.order(created_at: :desc, id: :desc)
 
-        @tweets_paginated = tweets.page(offset).per(limit)
-        @pagination = pagination(@tweets_paginated)
+        tweets_paginated = all_tweets.page(offset).per(limit)
+        pagination = pagination(tweets_paginated)
+
+        # ツイート画像のURLを追加
+        tweets = tweets_paginated.map do |tweet|
+          tweet.attributes.merge(image_url: tweet_image_url(tweet))
+        end
+        render json: { tweets: tweets, pagination: pagination }
       end
 
       def create
@@ -28,6 +34,10 @@ module Api
 
       def tweet_params
         params.permit(:tweet)
+      end
+
+      def tweet_image_url(tweet)
+        url_for(tweet.image) if tweet.image.attached?
       end
     end
   end
