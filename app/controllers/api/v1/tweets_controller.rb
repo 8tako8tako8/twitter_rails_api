@@ -18,7 +18,7 @@ module Api
       def create
         tweet = current_api_v1_user.tweets.build(tweet_params)
         if tweet.save
-          render json: { tweet: tweet }, status: :created
+          render json: { tweet: }, status: :created
         else
           render json: { errors: tweet.errors }, status: :unprocessable_entity
         end
