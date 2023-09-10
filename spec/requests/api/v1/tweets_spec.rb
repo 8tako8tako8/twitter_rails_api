@@ -3,6 +3,11 @@
 require 'rails_helper'
 
 RSpec.describe 'Api::V1::Tweets', type: :request do
+  # 認証をスキップさせる
+  before do
+    allow_any_instance_of(Api::V1::TweetsController).to receive(:authenticate_api_v1_user!).and_return(true)
+  end
+
   describe 'GET /api/v1/tweets' do
     before do
       FactoryBot.create_list(:tweet, 20)
