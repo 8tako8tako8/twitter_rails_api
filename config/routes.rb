@@ -12,7 +12,7 @@ Rails.application.routes.draw do
         resources :sessions, only: [:index]
       end
 
-      root 'tweets#index'
+      resources :tweets, only: %i[index], format: 'json'
     end
   end
 end

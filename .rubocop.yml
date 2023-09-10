@@ -22,3 +22,9 @@ RSpec/ContextWording:
   Enabled: false
 RSpec/MultipleExpectations:
   Enabled: false
+Hc/RailsSpecificActionName:
+  Enabled: false
+RSpec/NamedSubject:
+  Enabled: false
+RSpec/ExampleLength:
+  Enabled: false
