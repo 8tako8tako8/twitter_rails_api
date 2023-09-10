@@ -9,7 +9,7 @@ module Api
       def index
         offset = params[:offset].presence || 1
         limit = params[:limit].presence || 10
-        all_tweets = Tweet.order(created_at: :desc, id: :desc)
+        all_tweets = Tweet.with_attached_image.order(created_at: :desc, id: :desc)
 
         tweets_paginated = all_tweets.page(offset).per(limit)
         pagination = pagination(tweets_paginated)
