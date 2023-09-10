@@ -55,6 +55,7 @@ group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
+  gem 'faker'
   gem 'letter_opener_web', '~> 2.0'
   gem 'rspec-rails'
   gem 'rspec-request_describer'
