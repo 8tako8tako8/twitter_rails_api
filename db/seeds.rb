@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-USER_COUNT = 1 
-TWEET_COUNT = 1 
+USER_COUNT = 1
+TWEET_COUNT = 1
 
 ApplicationRecord.transaction do
   users = []

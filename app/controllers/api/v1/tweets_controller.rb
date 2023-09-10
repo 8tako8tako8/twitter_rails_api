@@ -18,7 +18,7 @@ module Api
         tweets = tweets_paginated.map do |tweet|
           tweet.attributes.merge(image_url: tweet_image_url(tweet))
         end
-        render json: { tweets: tweets, pagination: pagination }
+        render json: { tweets:, pagination: }
       end
 
       def create
