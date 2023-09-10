@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       end
 
       resources :tweets, only: %i[index create], format: 'json'
+      resources :images, only: [:create], format: 'json'
     end
   end
 end
