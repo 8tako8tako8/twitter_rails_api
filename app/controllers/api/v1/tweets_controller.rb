@@ -11,14 +11,8 @@ module Api
         limit = params[:limit].presence || 10
         all_tweets = Tweet.with_attached_image.order(created_at: :desc, id: :desc)
 
-        tweets_paginated = all_tweets.page(offset).per(limit)
-        pagination = pagination(tweets_paginated)
-
-        # ツイート画像のURLを追加
-        tweets = tweets_paginated.map do |tweet|
-          tweet.attributes.merge(image_url: tweet_image_url(tweet))
-        end
-        render json: { tweets:, pagination: }
+        @tweets_paginated = all_tweets.page(offset).per(limit)
+        @pagination = pagination(@tweets_paginated)
       end
 
       def create
