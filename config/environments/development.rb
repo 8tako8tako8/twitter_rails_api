@@ -2,6 +2,8 @@
 
 require 'active_support/core_ext/integer/time'
 
+Rails.application.routes.default_url_options = { host: 'localhost', port: 3100 }
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -62,6 +64,9 @@ Rails.application.configure do
 
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
+
+  # デフォルトのホストURLを設定する
+  default_url_options[:host] = "localhost:3100"
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true

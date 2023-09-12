@@ -9,6 +9,7 @@ module Api
       def index
         offset = params[:offset].presence || 1
         limit = params[:limit].presence || 10
+        # TODO: ページネーションのために全件検索しているが、パフォーマンス改善のため、全件検索しないようにする
         all_tweets = Tweet.with_attached_image.order(created_at: :desc, id: :desc)
 
         @tweets_paginated = all_tweets.page(offset).per(limit)
