@@ -66,7 +66,7 @@ Rails.application.configure do
   config.active_record.verbose_query_logs = true
 
   # デフォルトのホストURLを設定する
-  default_url_options[:host] = "localhost:3100"
+  default_url_options[:host] = 'localhost:3100'
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true

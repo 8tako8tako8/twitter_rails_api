@@ -10,7 +10,7 @@ tweets = @tweets_paginated.map do |tweet|
   hash[:user] = {
     id: tweet.user.id,
     name: tweet.user.name,
-    nickname: tweet.user.nickname,
+    nickname: tweet.user.nickname
   }
   hash[:image_url] = tweet.image.attached? ? Rails.application.routes.url_helpers.url_for(tweet.image) : nil
 

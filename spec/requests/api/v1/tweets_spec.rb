@@ -55,7 +55,7 @@ RSpec.describe 'Api::V1::Tweets', type: :request do
     let!(:tweet_id) do
       tweet.id
     end
-      
+
     it 'ツイート詳細が取得できること' do
       subject
       res = JSON.parse(response.body)
