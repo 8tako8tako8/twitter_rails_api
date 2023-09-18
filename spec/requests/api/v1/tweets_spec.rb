@@ -48,4 +48,18 @@ RSpec.describe 'Api::V1::Tweets', type: :request do
       expect(response).to have_http_status(:created)
     end
   end
+
+  describe 'GET /api/v1/tweets/:tweet_id' do
+    let!(:tweet) { FactoryBot.create(:tweet, tweet: 'テストツイート') }
+
+    let!(:tweet_id) do
+      tweet.id
+    end
+
+    it 'ツイート詳細が取得できること' do
+      subject
+      res = JSON.parse(response.body)
+      expect(res['tweet']).to eq 'テストツイート'
+    end
+  end
 end

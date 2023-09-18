@@ -4,7 +4,7 @@ module Api
   module V1
     class TweetsController < ApplicationController
       include Pagination
-      before_action :authenticate_api_v1_user!, only: %i[index create]
+      before_action :authenticate_api_v1_user!, only: %i[index create show]
 
       def index
         offset = params[:offset].presence || 1
@@ -23,6 +23,10 @@ module Api
         else
           render json: { errors: tweet.errors }, status: :unprocessable_entity
         end
+      end
+
+      def show
+        @tweet = Tweet.find(params[:id])
       end
 
       private
