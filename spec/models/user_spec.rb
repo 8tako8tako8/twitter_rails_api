@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
@@ -12,7 +14,7 @@ RSpec.describe User, type: :model do
         user = FactoryBot.build(:user, name: nil)
         expect(user).not_to be_valid
       end
-  
+
       it 'nameが20文字を超えた場合にエラーになること' do
         user = FactoryBot.build(:user, name: 'a' * 21)
         expect(user).not_to be_valid
@@ -24,7 +26,7 @@ RSpec.describe User, type: :model do
         user = FactoryBot.build(:user, nickname: nil)
         expect(user).not_to be_valid
       end
-  
+
       it 'nicknameが20文字を超えた場合にエラーになること' do
         user = FactoryBot.build(:user, nickname: 'a' * 21)
         expect(user).not_to be_valid

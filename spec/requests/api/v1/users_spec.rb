@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Api::V1::Users', type: :request do
@@ -14,7 +16,7 @@ RSpec.describe 'Api::V1::Users', type: :request do
     end
 
     before do
-      FactoryBot.create(:tweet, user: user, tweet: 'テストツイート')
+      FactoryBot.create(:tweet, user:, tweet: 'テストツイート')
     end
 
     it 'ユーザー情報が取得できること' do
