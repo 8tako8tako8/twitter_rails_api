@@ -6,8 +6,8 @@ class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
 
   has_many :tweets, dependent: :destroy
-  # has_one_attached :image
-  # has_one_attached :header_image
+  has_one_attached :avatar_image
+  has_one_attached :header_image
 
   validates :name, presence: true, length: { maximum: 20 }
   validates :nickname, presence: true, length: { maximum: 20 }
