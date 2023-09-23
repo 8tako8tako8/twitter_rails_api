@@ -44,12 +44,12 @@ RSpec.describe 'Api::V1::Users', type: :request do
     end
 
     context '正しいリクエストパラメータの場合' do
-      user_params = { nickname: "更新後ニックネーム", introduction: "よろしくお願いします！", location: "東京都", birthdate: "1990-01-01", website_url: "https://example.com" }
-    
-      let!(:params) { user_params }
+      user_params = { nickname: '更新後ニックネーム', introduction: 'よろしくお願いします！', location: '東京都', birthdate: '1990-01-01', website_url: 'https://example.com' }
 
       subject { put(api_v1_profile_path, headers:, params:) }
-  
+
+      let!(:params) { user_params }
+
       it 'ユーザー情報が更新できること' do
         subject
         expect(user.reload.nickname).to eq user_params[:nickname]
@@ -61,12 +61,12 @@ RSpec.describe 'Api::V1::Users', type: :request do
     end
 
     context '不正なリクエストパラメータの場合' do
-      user_params = { name: "テストネーム" }
-    
-      let!(:params) { user_params }
+      user_params = { name: 'テストネーム' }
 
       subject { put(api_v1_profile_path, headers:, params:) }
-  
+
+      let!(:params) { user_params }
+
       it 'ユーザーネームが更新できないこと' do
         subject
         expect(user.reload.name).not_to eq user_params[:name]
