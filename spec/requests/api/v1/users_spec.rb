@@ -44,7 +44,7 @@ RSpec.describe 'Api::V1::Users', type: :request do
     end
 
     context '正しいリクエストパラメータの場合' do
-      user_params = { nickname: "更新後ニックネーム", introduction: "よろしくお願いします！", location: "東京都", birthdate: "1990-01-01" }
+      user_params = { nickname: "更新後ニックネーム", introduction: "よろしくお願いします！", location: "東京都", birthdate: "1990-01-01", website_url: "https://example.com" }
     
       let!(:params) { user_params }
 
@@ -56,6 +56,7 @@ RSpec.describe 'Api::V1::Users', type: :request do
         expect(user.reload.introduction).to eq user_params[:introduction]
         expect(user.reload.location).to eq user_params[:location]
         expect(user.reload.birthdate.to_s).to eq user_params[:birthdate]
+        expect(user.reload.website_url).to eq user_params[:website_url]
       end
     end
 
