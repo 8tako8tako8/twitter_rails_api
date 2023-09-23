@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 
   namespace :api do
-    namespace :v1, default: { format: 'json' } do
+    namespace :v1 do
       mount_devise_token_auth_for 'User', at: 'users', controllers: {
         registrations: 'api/v1/auth/registrations'
       }
@@ -12,10 +12,10 @@ Rails.application.routes.draw do
         resources :sessions, only: [:index]
       end
 
-      resources :users, only: %i[show]
-      resource :profile, only: %i[update], controller: 'users'
-      resources :tweets, only: %i[index create show]
-      resources :images, only: [:create]
+      resources :users, only: %i[show], format: 'json'
+      resource :profile, only: %i[update], controller: 'users', format: 'json'
+      resources :tweets, only: %i[index create show], format: 'json'
+      resources :images, only: [:create], format: 'json'
     end
   end
 end
