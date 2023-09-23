@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       end
 
       resources :users, only: %i[show]
+      resource :profile, only: %i[update], controller: 'users'
       resources :tweets, only: %i[index create show]
       resources :images, only: [:create]
     end
