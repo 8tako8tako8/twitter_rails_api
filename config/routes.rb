@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       end
 
       resources :users, only: %i[show], format: 'json'
+      resource :profile, only: %i[update], controller: 'users', format: 'json'
       resources :tweets, only: %i[index create show], format: 'json'
       resources :images, only: [:create], format: 'json'
     end
