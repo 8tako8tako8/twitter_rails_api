@@ -24,7 +24,7 @@ module Api
 
         user.avatar_image.attach(params[:image])
         if user.avatar_image.attached?
-          render json: { message: '更新に成功しました' }, status: :ok
+          render json: { avatar_image_url: url_for(user.avatar_image) }, status: :ok
         else
           render json: { errors: ['画像の更新に失敗しました'] }, status: :unprocessable_entity
         end
@@ -35,7 +35,7 @@ module Api
 
         user.header_image.attach(params[:image])
         if user.header_image.attached?
-          render json: { message: '更新に成功しました' }, status: :ok
+          render json: { header_image_url: url_for(user.header_image) }, status: :ok
         else
           render json: { errors: ['画像の更新に失敗しました'] }, status: :unprocessable_entity
         end
