@@ -18,6 +18,28 @@ module Api
           render json: { errors: ['画像のアップロードに失敗しました'] }, status: :unprocessable_entity
         end
       end
+
+      def update_avatar_image
+        user = current_api_v1_user
+
+        user.avatar_image.attach(params[:image])
+        if user.avatar_image.attached?
+          render json: { message: '更新に成功しました' }, status: :ok
+        else
+          render json: { errors: ['画像の更新に失敗しました'] }, status: :unprocessable_entity
+        end
+      end
+
+      def update_header_image
+        user = current_api_v1_user
+
+        user.header_image.attach(params[:image])
+        if user.header_image.attached?
+          render json: { message: '更新に成功しました' }, status: :ok
+        else
+          render json: { errors: ['画像の更新に失敗しました'] }, status: :unprocessable_entity
+        end
+      end
     end
   end
 end
