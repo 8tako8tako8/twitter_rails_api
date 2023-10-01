@@ -17,7 +17,7 @@ Rails.application.routes.draw do
         put :avatar_image, controller: 'images', action: 'update_avatar_image', format: 'json'
         put :header_image, controller: 'images', action: 'update_header_image', format: 'json'
       end
-      resources :tweets, only: %i[index create show], format: 'json'
+      resources :tweets, only: %i[index create show destroy], format: 'json'
       resources :images, only: [:create], format: 'json'
     end
   end
