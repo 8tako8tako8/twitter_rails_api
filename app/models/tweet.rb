@@ -5,4 +5,8 @@ class Tweet < ApplicationRecord
   has_one_attached :image
 
   validates :tweet, presence: true, length: { maximum: 200 }
+
+  def created_by?(user)
+    self.user.id == user.id
+  end
 end
