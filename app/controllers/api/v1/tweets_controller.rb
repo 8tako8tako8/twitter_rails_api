@@ -33,7 +33,7 @@ module Api
         tweet_id = params[:id]
         tweet = Tweet.find(tweet_id)
 
-        if tweet.user.id != current_api_v1_user.id
+        if tweet.is_created_by?(current_api_v1_user)
           render json: { errors: 'ツイートした本人でないためツイートを削除できません' }, status: :unauthorized
         end
 
