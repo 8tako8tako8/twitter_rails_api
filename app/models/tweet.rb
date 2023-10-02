@@ -6,7 +6,7 @@ class Tweet < ApplicationRecord
 
   validates :tweet, presence: true, length: { maximum: 200 }
 
-  def is_created_by?(user)
+  def created_by?(user)
     self.user.id == user.id
   end
 end
