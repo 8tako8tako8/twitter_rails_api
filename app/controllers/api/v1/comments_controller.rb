@@ -13,7 +13,7 @@ module Api
         end
 
         comment = current_api_v1_user.comment(comment_params[:comment], tweet)
-        if comment.save
+        if comment.persisted?
           render json: { comment: }, status: :created
         else
           render json: { errors: comment.errors }, status: :unprocessable_entity
