@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       end
       resources :tweets, only: %i[index create show destroy], format: 'json'
       resources :images, only: [:create], format: 'json'
+      resources :comments, only: [:create], format: 'json'
     end
   end
 end
