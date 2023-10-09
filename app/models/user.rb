@@ -18,6 +18,6 @@ class User < ApplicationRecord
   # validates :website_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
 
   def comment(comment, tweet)
-    comments.create(comment: comment, tweet: tweet)
+    comments.create(comment:, tweet:)
   end
 end
