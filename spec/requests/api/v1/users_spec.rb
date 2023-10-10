@@ -10,14 +10,11 @@ RSpec.describe 'Api::V1::Users', type: :request do
 
   describe 'GET /api/v1/users/:user_id' do
     let!(:user) { FactoryBot.create(:user, nickname: 'テストユーザー') }
-
     let!(:user_id) do
       user.id
     end
-
-    before do
-      FactoryBot.create(:tweet, user:, tweet: 'テストツイート')
-    end
+    let!(:tweet) { FactoryBot.create(:tweet, user:, tweet: 'テストツイート') }
+    let!(:comment) { FactoryBot.create(:comment, user:, tweet:, comment: 'テストコメント') }
 
     it 'ユーザー情報が取得できること' do
       subject
@@ -29,6 +26,12 @@ RSpec.describe 'Api::V1::Users', type: :request do
       subject
       res = JSON.parse(response.body)
       expect(res['tweets'].first['tweet']).to eq 'テストツイート'
+    end
+
+    it 'ユーザーのコメント一覧が取得できること' do
+      subject
+      res = JSON.parse(response.body)
+      expect(res['comments'].first['comment']).to eq 'テストコメント'
     end
   end
 
