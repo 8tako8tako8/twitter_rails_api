@@ -22,7 +22,7 @@ Rails.application.routes.draw do
         resources :comments, only: [:index]
       end
       resources :images, only: [:create], format: 'json'
-      resources :comments, only: [:create], format: 'json'
+      resources :comments, only: %i[create destroy], format: 'json'
     end
   end
 end

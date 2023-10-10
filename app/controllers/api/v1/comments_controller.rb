@@ -4,7 +4,7 @@ module Api
   module V1
     class CommentsController < ApplicationController
       include Pagination
-      before_action :authenticate_api_v1_user!, only: %i[create index]
+      before_action :authenticate_api_v1_user!, only: %i[create index destroy]
 
       def index
         tweet = Tweet.find_by(id: params[:tweet_id])
@@ -32,6 +32,26 @@ module Api
         comment = current_api_v1_user.comment(comment_params[:comment], tweet)
         if comment.persisted?
           render json: { comment: }, status: :created
+        else
+          render json: { errors: comment.errors }, status: :unprocessable_entity
+        end
+      end
+
+      def destroy
+        comment_id = params[:id]
+        comment = Comment.find_by(id: comment_id)
+        unless comment
+          render json: { errors: 'コメントが見つかりません' }, status: :not_found
+          return
+        end
+
+        unless comment.created_by?(current_api_v1_user)
+          render json: { errors: 'コメントした本人でないためコメントを削除できません' }, status: :unauthorized
+          return
+        end
+
+        if comment.destroy
+          render json: { comment: }, status: :ok
         else
           render json: { errors: comment.errors }, status: :unprocessable_entity
         end
