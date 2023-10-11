@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-tweets = @tweets_paginated.map do |tweet|
+tweets = @tweets.map do |tweet|
   hash = {
     id: tweet.id,
     tweet: tweet.tweet,
@@ -24,3 +24,4 @@ json.extract! @user, :id, :name, :nickname, :introduction, :location, :website_u
 json.avatar_image_url @user.avatar_image.attached? ? Rails.application.routes.url_helpers.url_for(@user.avatar_image) : nil
 json.header_image_url @user.header_image.attached? ? Rails.application.routes.url_helpers.url_for(@user.header_image) : nil
 json.tweets tweets
+json.comments @comments

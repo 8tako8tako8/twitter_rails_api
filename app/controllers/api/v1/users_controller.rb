@@ -8,14 +8,8 @@ module Api
 
       def show
         @user = User.find(params[:id])
-
-        offset = params[:offset].presence || 1
-        limit = params[:limit].presence || 10
-        # TODO: ページネーションのために全件検索しているが、パフォーマンス改善のため、全件検索しないようにする
-        all_tweets = @user.tweets.with_attached_image.order(created_at: :desc, id: :desc)
-
-        @tweets_paginated = all_tweets.page(offset).per(limit)
-        @pagination = pagination(@tweets_paginated)
+        @tweets = @user.tweets.limit(10).with_attached_image.order(created_at: :desc, id: :desc)
+        @comments = @user.comments.limit(10).order(created_at: :desc, id: :desc)
       end
 
       def update
