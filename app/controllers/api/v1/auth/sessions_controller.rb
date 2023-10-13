@@ -5,7 +5,7 @@ module Api
     module Auth
       class SessionsController < ApplicationController
         def index
-          render json: current_api_v1_user
+          @user = current_api_v1_user
         end
       end
     end
