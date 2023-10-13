@@ -20,8 +20,27 @@ tweets = @tweets.map do |tweet|
   hash
 end
 
+comments = @comments.map do |comment|
+  hash = {
+    id: comment.id,
+    comment: comment.comment,
+    created_at: comment.created_at,
+    updated_at: comment.updated_at
+  }
+
+  avatar_image_url = comment.user.avatar_image.attached? ? Rails.application.routes.url_helpers.url_for(comment.user.avatar_image) : nil
+  hash[:user] = {
+    id: comment.user.id,
+    name: comment.user.name,
+    nickname: comment.user.nickname,
+    avatar_image_url:
+  }
+
+  hash
+end
+
 json.extract! @user, :id, :name, :nickname, :introduction, :location, :website_url, :birthdate
 json.avatar_image_url @user.avatar_image.attached? ? Rails.application.routes.url_helpers.url_for(@user.avatar_image) : nil
 json.header_image_url @user.header_image.attached? ? Rails.application.routes.url_helpers.url_for(@user.header_image) : nil
 json.tweets tweets
-json.comments @comments
+json.comments comments
