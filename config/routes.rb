@@ -9,7 +9,7 @@ Rails.application.routes.draw do
         registrations: 'api/v1/auth/registrations'
       }
       namespace :auth do
-        resources :sessions, only: [:index]
+        resources :sessions, only: [:index], format: 'json'
       end
 
       resources :users, only: %i[show], format: 'json'
