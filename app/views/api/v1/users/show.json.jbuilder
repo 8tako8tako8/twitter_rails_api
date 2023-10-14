@@ -5,7 +5,8 @@ tweets = @tweets.map do |tweet|
     id: tweet.id,
     tweet: tweet.tweet,
     created_at: tweet.created_at,
-    updated_at: tweet.updated_at
+    updated_at: tweet.updated_at,
+    retweets: tweet.count_retweets
   }
 
   avatar_image_url = tweet.user.avatar_image.attached? ? Rails.application.routes.url_helpers.url_for(tweet.user.avatar_image) : nil
