@@ -11,4 +11,8 @@ class Tweet < ApplicationRecord
   def created_by?(user)
     self.user.id == user.id
   end
+
+  def count_retweets
+    retweets.count
+  end
 end
