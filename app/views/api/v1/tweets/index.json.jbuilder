@@ -14,6 +14,8 @@ tweets = @tweets_paginated.map do |tweet|
   }
   hash[:image_url] = tweet.image.attached? ? Rails.application.routes.url_helpers.url_for(tweet.image) : nil
 
+  hash[:retweets] = tweet.count_retweets
+
   hash
 end
 
