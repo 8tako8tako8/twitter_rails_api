@@ -13,7 +13,7 @@ module Api
         end
 
         current_api_v1_user.retweet(tweet)
-        render json: { tweet: }, status: :created
+        render json: { tweet: }, status: :ok
       end
 
       def destroy
