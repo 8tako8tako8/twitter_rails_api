@@ -21,4 +21,9 @@ class User < ApplicationRecord
   def comment(comment, tweet)
     comments.create(comment:, tweet:)
   end
+
+  def retweet(tweet)
+    retweets.find_or_create_by(tweet:)
+  end
+
 end
