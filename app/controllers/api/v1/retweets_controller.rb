@@ -14,6 +14,17 @@ module Api
         current_api_v1_user.retweet(tweet)
         render json: { tweet: }, status: :created
       end
+
+      def destroy
+        tweet = Tweet.find_by(id: params[:tweet_id])
+        unless tweet
+          render json: { errors: 'ツイートが見つかりません' }, status: :not_found
+          return
+        end
+
+        current_api_v1_user.cancel_retweet(tweet)
+        render json: { tweet: }, status: :ok
+      end
     end
   end
 end
