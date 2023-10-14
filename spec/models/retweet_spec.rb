@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Retweet, type: :model do
@@ -11,8 +13,8 @@ RSpec.describe Retweet, type: :model do
     end
 
     it '同一ユーザーが同一ツイートを複数回リツイートできないこと' do
-      FactoryBot.create(:retweet, user: user, tweet: tweet)
-      duplicate_retweet = FactoryBot.build(:retweet, user: user, tweet: tweet)
+      FactoryBot.create(:retweet, user:, tweet:)
+      duplicate_retweet = FactoryBot.build(:retweet, user:, tweet:)
       expect(duplicate_retweet).not_to be_valid
     end
   end
