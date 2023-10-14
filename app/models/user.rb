@@ -26,4 +26,7 @@ class User < ApplicationRecord
     retweets.find_or_create_by(tweet:)
   end
 
+  def cancel_retweet(tweet)
+    retweets.find_by(tweet:)&.destroy
+  end
 end
