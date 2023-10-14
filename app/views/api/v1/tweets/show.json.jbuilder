@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
-user = { id: @tweet.user.id, name: @tweet.user.name, nickname: @tweet.user.nickname }
+avatar_image_url = @tweet.user.avatar_image.attached? ? Rails.application.routes.url_helpers.url_for(@tweet.user.avatar_image) : nil
+user = {
+  id: @tweet.user.id,
+  name: @tweet.user.name,
+  nickname: @tweet.user.nickname,
+  avatar_image_url:
+}
 
 json.id @tweet.id
 json.tweet @tweet.tweet
