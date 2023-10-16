@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :tweets, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :retweets, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   has_one_attached :avatar_image
   has_one_attached :header_image
 
@@ -28,5 +29,13 @@ class User < ApplicationRecord
 
   def cancel_retweet(tweet)
     retweets.find_by(tweet:)&.destroy
+  end
+
+  def favorite(tweet)
+    favorites.find_or_create_by(tweet:)
+  end
+
+  def cancel_favorite(tweet)
+    favorites.find_by(tweet:)&.destroy
   end
 end
