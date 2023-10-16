@@ -6,7 +6,7 @@ tweets = @tweets.map do |tweet|
     tweet: tweet.tweet,
     created_at: tweet.created_at,
     updated_at: tweet.updated_at,
-    retweets: tweet.count_retweets
+    retweets: tweet.count_retweets,
     favorites: tweet.count_favorites
   }
 
