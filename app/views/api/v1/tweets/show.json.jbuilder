@@ -14,3 +14,4 @@ json.image_url @tweet.image.attached? ? Rails.application.routes.url_helpers.url
 json.created_at @tweet.created_at
 json.updated_at @tweet.updated_at
 json.user user
+json.retweets @tweet.count_retweets
