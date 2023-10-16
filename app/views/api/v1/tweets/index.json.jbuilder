@@ -20,6 +20,8 @@ tweets = @tweets_paginated.map do |tweet|
 
   hash[:retweets] = tweet.count_retweets
 
+  hash[:favorites] = tweet.count_favorites
+
   hash
 end
 
