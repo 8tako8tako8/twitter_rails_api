@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       resources :tweets, only: [:show], format: 'json' do
         resources :comments, only: [:index]
         resource :retweet, only: %i[create destroy]
+        resource :favorite, only: %i[create destroy]
       end
       resources :images, only: [:create], format: 'json'
       resources :comments, only: %i[create destroy], format: 'json'

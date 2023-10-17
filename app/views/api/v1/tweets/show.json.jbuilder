@@ -15,3 +15,4 @@ json.created_at @tweet.created_at
 json.updated_at @tweet.updated_at
 json.user user
 json.retweets @tweet.count_retweets
+json.favorites @tweet.count_favorites
