@@ -14,6 +14,7 @@ module Api
 
         @tweets_paginated = all_tweets.page(offset).per(limit)
         @pagination = pagination(@tweets_paginated)
+        @user = current_api_v1_user
       end
 
       def create
@@ -27,6 +28,7 @@ module Api
 
       def show
         @tweet = Tweet.find(params[:id])
+        @user = current_api_v1_user
       end
 
       def destroy

@@ -31,11 +31,19 @@ class User < ApplicationRecord
     retweets.find_by(tweet:)&.destroy
   end
 
+  def retweet?(tweet)
+    retweets.exists?(tweet:)
+  end
+
   def favorite(tweet)
     favorites.find_or_create_by(tweet:)
   end
 
   def cancel_favorite(tweet)
     favorites.find_by(tweet:)&.destroy
+  end
+
+  def favorite?(tweet)
+    favorites.exists?(tweet:)
   end
 end
