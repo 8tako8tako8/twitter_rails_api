@@ -18,6 +18,10 @@ tweets = @tweets_paginated.map do |tweet|
 
   hash[:image_url] = tweet.image.attached? ? Rails.application.routes.url_helpers.url_for(tweet.image) : nil
 
+  hash[:is_retweeted] = @user.retweet?(tweet)
+
+  hash[:is_favorited] = @user.favorite?(tweet)
+
   hash[:retweets] = tweet.count_retweets
 
   hash[:favorites] = tweet.count_favorites
