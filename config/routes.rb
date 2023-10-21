@@ -13,7 +13,8 @@ Rails.application.routes.draw do
       end
 
       resources :users, only: %i[show], format: 'json' do
-        resource :follow, only: %i[create destroy]
+        post :follow, to: 'follows#create'
+        post :unfollow, to: 'follows#destroy'
       end
       resource :profile, only: %i[update], controller: 'users', format: 'json' do
         put :avatar_image, controller: 'images', action: 'update_avatar_image', format: 'json'
