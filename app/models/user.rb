@@ -23,7 +23,7 @@ class User < ApplicationRecord
   # TODO: サインイン時にallow_blankが適応されずバリデーションエラーとなるので一旦コメントアウト
   # validates :website_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
 
-  def is_same?(user)
+  def same?(user)
     id == user.id
   end
 
@@ -56,13 +56,13 @@ class User < ApplicationRecord
   end
 
   def follow(user)
-    return if is_same?(user)
+    return if same?(user)
 
     active_relationships.find_or_create_by(followed_user_id: user.id)
   end
 
   def cancel_follow(user)
-    return if is_same?(user)
+    return if same?(user)
 
     ar = active_relationships.find_by(followed_user_id: user.id)
 

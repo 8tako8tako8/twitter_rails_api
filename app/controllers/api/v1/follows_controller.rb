@@ -13,7 +13,7 @@ module Api
           return
         end
 
-        if current_api_v1_user.is_same?(user)
+        if current_api_v1_user.same?(user)
           render json: { errors: '自分自身をフォローすることはできません' }, status: :bad_request
           return
         end
@@ -33,7 +33,7 @@ module Api
           return
         end
 
-        if current_api_v1_user.is_same?(user)
+        if current_api_v1_user.same?(user)
           render json: { errors: '自分自身をフォローすることはできません' }, status: :bad_request
           return
         end
