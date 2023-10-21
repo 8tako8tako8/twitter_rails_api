@@ -39,9 +39,9 @@ module Api
         end
 
         if current_api_v1_user.cancel_follow(user)
-          render status: :no_content
+          render json: { }, status: :no_content
         else
-          render json: { errors: 'フォローに失敗しました' }, status: :internal_server_error
+          render json: { errors: 'フォロー解除に失敗しました' }, status: :internal_server_error
         end
       end
     end
