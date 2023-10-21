@@ -62,12 +62,12 @@ class User < ApplicationRecord
 
     ar = active_relationships.find_by(followed_user_id: user.id)
 
-    # 
+    #
     # NOTE:
     #   active_relationships が見つからない場合、フォロー解除済みとしてtrueを返す
-    # 
+    #
     return true unless ar
-    
+
     ar.destroy
   end
 end
