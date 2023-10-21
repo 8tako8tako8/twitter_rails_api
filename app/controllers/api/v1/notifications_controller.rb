@@ -12,7 +12,7 @@ module Api
         all_notifications = current_api_v1_user.notifications.order(created_at: :desc, id: :desc)
 
         @notifications_paginated = all_notifications.page(offset).per(limit)
-        @pagination = pagination(@notifications_paginated)        
+        @pagination = pagination(@notifications_paginated)
         @user = current_api_v1_user
       end
     end

@@ -14,7 +14,7 @@ class Comment < ApplicationRecord
   end
 
   private
-  
+
   def create_notification
     return if tweet.user.id == user.id
 
