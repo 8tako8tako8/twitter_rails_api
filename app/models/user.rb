@@ -60,6 +60,14 @@ class User < ApplicationRecord
   def cancel_follow(user)
     return unless id != user.id
 
-    active_relationships.find_by(followed_user_id: user.id)&.destroy
+    ar = active_relationships.find_by(followed_user_id: user.id)
+
+    # 
+    # NOTE:
+    #   active_relationships が見つからない場合、フォロー解除済みとしてtrueを返す
+    # 
+    return true unless ar
+    
+    ar.destroy
   end
 end
