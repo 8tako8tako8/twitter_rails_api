@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :followings, through: :active_relationships, source: :followed_user
   has_many :passive_relationships, class_name: 'Follow', foreign_key: 'followed_user_id', dependent: :destroy, inverse_of: :followed_user
   has_many :followers, through: :passive_relationships, source: :follower_user
+  has_many :notifications, dependent: :destroy
   has_one_attached :avatar_image
   has_one_attached :header_image
 

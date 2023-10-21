@@ -3,6 +3,7 @@
 class Comment < ApplicationRecord
   belongs_to :tweet
   belongs_to :user
+  has_one :notification, as: :subject, dependent: :destroy
 
   validates :comment, presence: true, length: { maximum: 200 }
 
