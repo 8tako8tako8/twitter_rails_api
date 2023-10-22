@@ -75,4 +75,8 @@ class User < ApplicationRecord
 
     ar.destroy
   end
+
+  def following?(user)
+    followings.exists?(user.id)
+  end
 end
