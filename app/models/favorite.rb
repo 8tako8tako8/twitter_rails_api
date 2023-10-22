@@ -12,7 +12,7 @@ class Favorite < ApplicationRecord
   private
 
   def create_notification
-    return if tweet.user.id == user.id
+    return if user.same?(tweet.user)
 
     Notification.create(subject: self, user: tweet.user, action_type: Notification.action_types[:favorite])
   end
