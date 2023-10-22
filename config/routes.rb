@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       end
       resources :images, only: [:create], format: 'json'
       resources :comments, only: %i[create destroy], format: 'json'
+      resources :notifications, only: [:index], format: 'json'
     end
   end
 end
