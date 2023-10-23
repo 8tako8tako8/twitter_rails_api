@@ -61,11 +61,11 @@ class User < ApplicationRecord
   end
 
   def bookmark(tweet)
-    bookmarks.find_or_create_by(tweet: tweet)
+    bookmarks.find_or_create_by(tweet:)
   end
 
   def cancel_bookmark(tweet)
-    bookmarks.find_by(tweet: tweet)&.destroy
+    bookmarks.find_by(tweet:)&.destroy
   end
 
   def follow(user)
