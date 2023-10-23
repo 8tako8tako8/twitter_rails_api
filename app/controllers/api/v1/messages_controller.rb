@@ -3,6 +3,16 @@
 module Api
   module V1
     class MessagesController < ApplicationController
+      def index
+        group = Group.find_by(id: params[:group_id])
+        unless group
+          render json: { errors: 'グループが見つかりません' }, status: :not_found
+          return
+        end
+
+        @messages = group.messages.order(created_at: :asc)
+      end
+
       def create
         group = Group.find_by(id: params[:group_id])
         unless group
