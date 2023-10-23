@@ -3,13 +3,20 @@
 require 'rails_helper'
 
 RSpec.describe 'Api::V1::Users', type: :request do
-  # 認証をスキップさせる
+  let!(:user) { FactoryBot.create(:user, nickname: 'テストユーザー') }
+
   before do
+    # 認証をスキップさせる
     allow_any_instance_of(Api::V1::UsersController).to receive(:authenticate_api_v1_user!).and_return(true)
+
+    # 認証情報をヘッダーに付与する
+    auth_token = user.create_new_auth_token
+    headers['access-token'] = auth_token['access-token']
+    headers['client'] = auth_token['client']
+    headers['uid'] = auth_token['uid']
   end
 
   describe 'GET /api/v1/users/:user_id' do
-    let!(:user) { FactoryBot.create(:user, nickname: 'テストユーザー') }
     let!(:user_id) do
       user.id
     end
@@ -36,16 +43,6 @@ RSpec.describe 'Api::V1::Users', type: :request do
   end
 
   describe 'PUT /api/v1/profile' do
-    let!(:user) { FactoryBot.create(:user) }
-
-    # 認証情報をヘッダーに付与する
-    before do
-      auth_token = user.create_new_auth_token
-      headers['access-token'] = auth_token['access-token']
-      headers['client'] = auth_token['client']
-      headers['uid'] = auth_token['uid']
-    end
-
     context '正しいリクエストパラメータの場合' do
       user_params = { nickname: '更新後ニックネーム', introduction: 'よろしくお願いします！', location: '東京都', birthdate: '1990-01-01', website_url: 'https://example.com' }
 
