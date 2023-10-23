@@ -1,6 +1,8 @@
 module Api
   module V1
     class BookmarksController < ApplicationController
+      before_action :authenticate_api_v1_user!, only: %i[index create destroy]
+
       def index
         offset = params[:offset].presence || 1
         limit = params[:limit].presence || 10
