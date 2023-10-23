@@ -3,6 +3,7 @@
 module Api
   module V1
     class BookmarksController < ApplicationController
+      include Pagination
       before_action :authenticate_api_v1_user!, only: %i[index create destroy]
 
       def index
@@ -16,7 +17,7 @@ module Api
       end
 
       def create
-        tweet = Tweet.find_by(bookmark_params[:tweet_id])
+        tweet = Tweet.find_by(id: bookmark_params[:tweet_id])
         unless tweet
           render json: { errors: 'ツイートが見つかりません' }, status: :not_found
           return
@@ -27,7 +28,7 @@ module Api
       end
 
       def destroy
-        tweet = Tweet.find_by(bookmark_params[:tweet_id])
+        tweet = Tweet.find_by(id: bookmark_params[:tweet_id])
         unless tweet
           render json: { errors: 'ツイートが見つかりません' }, status: :not_found
           return
