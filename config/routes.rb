@@ -32,6 +32,7 @@ Rails.application.routes.draw do
       resources :groups, only: %i[index create], format: 'json' do
         resources :messages, only: %i[index create], format: 'json'
       end
+      resources :bookmarks, only: %i[index create destroy], format: 'json'
     end
   end
 end
