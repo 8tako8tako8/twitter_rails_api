@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class BookmarksController < ApplicationController
@@ -12,9 +14,9 @@ module Api
         @bookmarks_paginated = all_bookmarks.page(offset).per(limit)
         @pagination = pagination(@bookmarks_paginated)
       end
-    
+
       def create
-        tweet = Tweet.find_by(params[:tweet_id])
+        tweet = Tweet.find_by(bookmark_params[:tweet_id])
         unless tweet
           render json: { errors: 'ツイートが見つかりません' }, status: :not_found
           return
@@ -23,9 +25,9 @@ module Api
         current_api_v1_user.bookmark(tweet)
         render json: { tweet: }, status: :ok
       end
-    
+
       def destroy
-        tweet = Tweet.find_by(params[:tweet_id])
+        tweet = Tweet.find_by(bookmark_params[:tweet_id])
         unless tweet
           render json: { errors: 'ツイートが見つかりません' }, status: :not_found
           return
@@ -33,6 +35,12 @@ module Api
 
         current_api_v1_user.cancel_bookmark(tweet)
         render json: { tweet: }, status: :ok
+      end
+
+      private
+
+      def bookmark_params
+        params.permit(:tweet_id)
       end
     end
   end
