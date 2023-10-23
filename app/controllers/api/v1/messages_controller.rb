@@ -3,6 +3,8 @@
 module Api
   module V1
     class MessagesController < ApplicationController
+      before_action :authenticate_api_v1_user!, only: %i[index create]
+
       def index
         group = Group.find_by(id: params[:group_id])
         unless group
