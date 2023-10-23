@@ -60,6 +60,14 @@ class User < ApplicationRecord
     favorites.exists?(tweet:)
   end
 
+  def bookmark(tweet)
+    bookmarks.find_or_create_by(tweet: tweet)
+  end
+
+  def cancel_bookmark(tweet)
+    bookmarks.find_by(tweet: tweet)&.destroy
+  end
+
   def follow(user)
     return if same?(user)
 
