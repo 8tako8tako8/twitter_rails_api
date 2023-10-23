@@ -10,5 +10,28 @@ module Api
         @bookmarks_paginated = all_bookmarks.page(offset).per(limit)
         @pagination = pagination(@bookmarks_paginated)
       end
+    
+      def create
+        tweet = Tweet.find_by(params[:tweet_id])
+        unless tweet
+          render json: { errors: 'ツイートが見つかりません' }, status: :not_found
+          return
+        end
+
+        current_api_v1_user.bookmark(tweet)
+        render json: { tweet: }, status: :ok
+      end
+    
+      def destroy
+        tweet = Tweet.find_by(params[:tweet_id])
+        unless tweet
+          render json: { errors: 'ツイートが見つかりません' }, status: :not_found
+          return
+        end
+
+        current_api_v1_user.cancel_bookmark(tweet)
+        render json: { tweet: }, status: :ok
+      end
+    end
   end
 end
