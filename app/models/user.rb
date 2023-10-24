@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :retweets, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
   has_many :active_relationships, class_name: 'Follow', foreign_key: 'follower_user_id', dependent: :destroy, inverse_of: :follower_user
   has_many :followings, through: :active_relationships, source: :followed_user
   has_many :passive_relationships, class_name: 'Follow', foreign_key: 'followed_user_id', dependent: :destroy, inverse_of: :followed_user
@@ -57,6 +58,14 @@ class User < ApplicationRecord
 
   def favorite?(tweet)
     favorites.exists?(tweet:)
+  end
+
+  def bookmark(tweet)
+    bookmarks.find_or_create_by(tweet:)
+  end
+
+  def cancel_bookmark(tweet)
+    bookmarks.find_by(tweet:)&.destroy
   end
 
   def follow(user)
