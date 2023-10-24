@@ -16,7 +16,7 @@ module Api
           return
         end
 
-        group = current_api_v1_user.create_group(user)
+        group = current_api_v1_user.find_or_create_group(user)
 
         render json: { group: }, status: :created
       end

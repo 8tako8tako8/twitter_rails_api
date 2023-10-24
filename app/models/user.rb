@@ -83,7 +83,7 @@ class User < ApplicationRecord
     followings.exists?(user.id)
   end
 
-  def create_group(user)
+  def find_or_create_group(user)
     common_group = common_group(user)
 
     # グループが存在する場合はそのグループを返す
