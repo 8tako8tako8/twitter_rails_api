@@ -90,8 +90,7 @@ class User < ApplicationRecord
     return common_group if common_group
 
     group = Group.create
-    group.entries.create(user_id: id)
-    group.entries.create(user_id: user.id)
+    group.entries.create([{ user_id: id }, { user_id: user.id }])
 
     group
   end
