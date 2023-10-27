@@ -6,7 +6,7 @@ module Api
       before_action :authenticate_api_v1_user!, only: %i[index create]
 
       def index
-        @users = search_users
+        @groups = search_groups.sort_by { |group| group[:group].id }
       end
 
       def create
@@ -23,8 +23,17 @@ module Api
 
       private
 
-      def search_users
-        User.joins(:entries).where(entries: { group: current_api_v1_user.groups }).where.not(id: current_api_v1_user.id).order(created_at: :asc)
+      def search_groups
+        entries = Entry.where(group: current_api_v1_user.groups).where.not(user_id: current_api_v1_user.id).preload(:user, :group)
+        
+        groups = entries.map do |entry|
+          {
+            group: entry.group,
+            user: entry.user
+          }
+        end
+
+        groups
       end
 
       def group_params

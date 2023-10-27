@@ -1,14 +1,20 @@
 # frozen_string_literal: true
 
-users = @users.map do |user|
-  avatar_image_url = user.avatar_image.attached? ? Rails.application.routes.url_helpers.url_for(user.avatar_image) : nil
+groups = @groups.map do |group|
+  hash = {
+    id: group[:group].id,
+  }
 
-  {
-    id: user.id,
-    name: user.name,
-    nickname: user.nickname,
+  avatar_image_url = group[:user].avatar_image.attached? ? Rails.application.routes.url_helpers.url_for(group[:user].avatar_image) : nil
+
+  hash[:user] = {
+    id: group[:user].id,
+    name: group[:user].name,
+    nickname: group[:user].nickname,
     avatar_image_url:
   }
+
+  hash
 end
 
-json.users users
+json.groups groups
