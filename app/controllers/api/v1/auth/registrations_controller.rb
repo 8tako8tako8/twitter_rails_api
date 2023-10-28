@@ -4,6 +4,14 @@ module Api
   module V1
     module Auth
       class RegistrationsController < DeviseTokenAuth::RegistrationsController
+        def destroy
+          if current_api_v1_user.logical_delete
+            render json: {}, status: :ok
+          else
+            render json: { errors: 'アカウント削除に失敗しました。' }, status: :unprocessable_entity
+          end
+        end
+
         private
 
         def sign_up_params
