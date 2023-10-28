@@ -10,10 +10,13 @@ module Api
         offset = params[:offset].presence || 1
         limit = params[:limit].presence || 10
         # TODO: ページネーションのために全件検索しているが、パフォーマンス改善のため、全件検索しないようにする
-        all_bookmarks = current_api_v1_user.bookmarks.order(created_at: :desc, id: :desc)
+        # TODO: リツイート、いいね、ブックマークしているかが各ツイートでクエリ発行されるので解決する
+        all_bookmarks = current_api_v1_user.bookmarks
+          .preload(:user, :tweet).order(created_at: :desc, id: :desc)
 
         @bookmarks_paginated = all_bookmarks.page(offset).per(limit)
         @pagination = pagination(@bookmarks_paginated)
+        @user = current_api_v1_user
       end
 
       def create

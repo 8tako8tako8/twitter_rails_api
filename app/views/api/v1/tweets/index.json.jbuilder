@@ -22,6 +22,8 @@ tweets = @tweets_paginated.map do |tweet|
 
   hash[:is_favorited] = @user.favorite?(tweet)
 
+  hash[:is_bookmarked] = @user.bookmark?(tweet)
+
   hash[:retweets] = tweet.count_retweets
 
   hash[:favorites] = tweet.count_favorites
