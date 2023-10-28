@@ -28,6 +28,14 @@ class User < ApplicationRecord
   # TODO: サインイン時にallow_blankが適応されずバリデーションエラーとなるので一旦コメントアウト
   # validates :website_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
 
+  def logical_delete
+    update(deleted_at: Time.current)
+  end
+
+  def logical_deleted?
+    deleted_at.present?
+  end
+
   def same?(user)
     id == user.id
   end
