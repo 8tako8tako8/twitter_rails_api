@@ -8,6 +8,7 @@ tweets = @tweets.map do |tweet|
     updated_at: tweet.updated_at,
     is_retweeted: @user.retweet?(tweet),
     is_favorited: @user.favorite?(tweet),
+    is_bookmarked: @user.bookmark?(tweet),
     retweets: tweet.count_retweets,
     favorites: tweet.count_favorites
   }

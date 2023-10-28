@@ -16,5 +16,6 @@ json.updated_at @tweet.updated_at
 json.user tweet_user
 json.is_retweeted @user.retweet?(@tweet)
 json.is_favorited @user.favorite?(@tweet)
+json.is_bookmarked @user.bookmark?(@tweet)
 json.retweets @tweet.count_retweets
 json.favorites @tweet.count_favorites

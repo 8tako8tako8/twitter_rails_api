@@ -68,6 +68,10 @@ class User < ApplicationRecord
     bookmarks.find_by(tweet:)&.destroy
   end
 
+  def bookmark?(tweet)
+    bookmarks.exists?(tweet:)
+  end
+
   def follow(user)
     return if same?(user)
 
