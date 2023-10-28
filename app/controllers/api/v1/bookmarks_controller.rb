@@ -12,7 +12,7 @@ module Api
         # TODO: ページネーションのために全件検索しているが、パフォーマンス改善のため、全件検索しないようにする
         # TODO: リツイート、いいね、ブックマークしているかが各ツイートでクエリ発行されるので解決する
         all_bookmarks = current_api_v1_user.bookmarks
-          .preload(:user, :tweet).order(created_at: :desc, id: :desc)
+                                           .preload(:user, :tweet).order(created_at: :desc, id: :desc)
 
         @bookmarks_paginated = all_bookmarks.page(offset).per(limit)
         @pagination = pagination(@bookmarks_paginated)

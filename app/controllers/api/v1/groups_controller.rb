@@ -25,15 +25,13 @@ module Api
 
       def search_groups
         entries = Entry.where(group: current_api_v1_user.groups).where.not(user_id: current_api_v1_user.id).preload(:user, :group)
-        
-        groups = entries.map do |entry|
+
+        entries.map do |entry|
           {
             group: entry.group,
             user: entry.user
           }
         end
-
-        groups
       end
 
       def group_params
