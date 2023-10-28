@@ -18,7 +18,7 @@ module Api
 
         group = current_api_v1_user.find_or_create_group(user)
 
-        render json: { group: }, status: :created
+        render json: { group: }, status: :ok
       end
 
       private
