@@ -29,7 +29,7 @@ module Api
         end
 
         avatar_image_url = current_api_v1_user&.avatar_image&.attached? ? Rails.application.routes.url_helpers.url_for(current_api_v1_user.avatar_image) : nil
-        user = current_api_v1_user&.as_json&.merge(avatar_image_url: avatar_image_url)
+        user = current_api_v1_user&.as_json&.merge(avatar_image_url:)
 
         render json: user, status: :ok
       end

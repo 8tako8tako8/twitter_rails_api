@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       mount_devise_token_auth_for 'User', at: 'users', controllers: {
         registrations: 'api/v1/auth/registrations',
-        sessions: 'api/v1/auth/sessions',
+        sessions: 'api/v1/auth/sessions'
       }
       get :user_session, to: 'users#user_session', format: 'json'
 
