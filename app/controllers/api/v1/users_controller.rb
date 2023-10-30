@@ -4,7 +4,7 @@ module Api
   module V1
     class UsersController < ApplicationController
       include Pagination
-      before_action :authenticate_api_v1_user!, only: %i[show]
+      before_action :authenticate_api_v1_user!, only: %i[show update]
 
       def show
         @user = User.find(params[:id])
@@ -20,6 +20,18 @@ module Api
         else
           render json: @user.errors, status: :unprocessable_entity
         end
+      end
+
+      def user_session
+        if current_api_v1_user.deleted_at.present?
+          render json: nil, status: :forbidden
+          return
+        end
+
+        avatar_image_url = current_api_v1_user&.avatar_image&.attached? ? Rails.application.routes.url_helpers.url_for(current_api_v1_user.avatar_image) : nil
+        user = current_api_v1_user&.as_json&.merge(avatar_image_url:)
+
+        render json: user, status: :ok
       end
 
       private

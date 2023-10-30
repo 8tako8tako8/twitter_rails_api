@@ -34,3 +34,5 @@ RSpec/AnyInstance:
     - "spec/**/*"
 RSpec/LetSetup:
   Enabled: false
+Rails/LexicallyScopedActionFilter:
+  Enabled: false
