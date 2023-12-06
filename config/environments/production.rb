@@ -62,18 +62,18 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { host: ENV.fetch("BACKEND_DOMAIN"), protocl: 'https' }
+  config.action_mailer.default_url_options = { host: ENV.fetch('BACKEND_DOMAIN'), protocl: 'https' }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default charset: 'utf-8'
   config.action_mailer.smtp_settings = {
-    address: 'email-smtp.' + ENV.fetch("AWS_REGION") + '.amazonaws.com',
+    address: "email-smtp.#{ENV.fetch('AWS_REGION')}.amazonaws.com",
     port: 587,
-    domain: ENV.fetch("FRONTEND_DOMAIN"),
+    domain: ENV.fetch('FRONTEND_DOMAIN'),
     authentication: :login,
-    user_name: ENV.fetch("SES_USERNAME"),
-    password: ENV.fetch("SES_PASSWORD"),
+    user_name: ENV.fetch('SES_USERNAME'),
+    password: ENV.fetch('SES_PASSWORD')
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
@@ -104,5 +104,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # デフォルトのホストURLを設定する
-  default_url_options[:host] = ENV.fetch("BACKEND_DOMAIN")
+  default_url_options[:host] = ENV.fetch('BACKEND_DOMAIN')
 end
