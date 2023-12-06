@@ -104,5 +104,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # デフォルトのホストURLを設定する
-  default_url_options[:host] = 'twitter-rails-api1-a77730c5e74f.herokuapp.com'
+  default_url_options[:host] = ENV.fetch("BACKEND_DOMAIN")
 end
