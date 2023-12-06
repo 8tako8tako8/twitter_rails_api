@@ -62,19 +62,18 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { host: 'twitter-rails-api1-a77730c5e74f.herokuapp.com', protocl: 'https' }
+  config.action_mailer.default_url_options = { host: ENV.fetch("BACKEND_DOMAIN"), protocl: 'https' }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default charset: 'utf-8'
   config.action_mailer.smtp_settings = {
-    address: 'smtp.sendgrid.net',
+    address: 'email-smtp.' + ENV.fetch("AWS_REGION") + '.amazonaws.com',
     port: 587,
-    domain: 'heroku.com',
-    user_name: 'apikey',
-    password: ENV.fetch('SENDGRID_APIKEY', nil),
-    authentication: :plain,
-    enable_starttls_auto: true
+    domain: ENV.fetch("FRONTEND_DOMAIN"),
+    authentication: :login,
+    user_name: ENV.fetch("SES_USERNAME"),
+    password: ENV.fetch("SES_PASSWORD"),
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
 class ApplicationMailer < ActionMailer::Base
-  default from: ENV.fetch('SENDER_ADDRESS', nil)
+  default from: 'no-reply@' + ENV.fetch("FRONTEND_DOMAIN")
   layout 'mailer'
 end
