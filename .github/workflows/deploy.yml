@@ -15,6 +15,7 @@ env:
   ECR_IMAGE_TAG: latest
   RAILS_ENV: production
   BACKEND_DOMAIN: api.8tako8tako8.tech
+  FRONTEND_DOMAIN: web.8tako8tako8.tech
 
 jobs:
   deploy:
