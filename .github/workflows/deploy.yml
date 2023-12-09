@@ -16,8 +16,7 @@ jobs:
     environment: production
 
     steps:
-      - run:
-        echo "Deploying to production"
+      - run: echo "Deploying to production"
 
     # steps:
     # - name: Checkout
