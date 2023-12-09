@@ -14,8 +14,6 @@ env:
   ECR_REPOSITORY: twitter-clone-api-ecs
   ECR_IMAGE_TAG: latest
   RAILS_ENV: production
-  BACKEND_DOMAIN: api.8tako8tako8.tech
-  FRONTEND_DOMAIN: web.8tako8tako8.tech
 
 jobs:
   deploy:
@@ -66,5 +64,6 @@ jobs:
       with:
         bundler-cache: true
 
-    - name: Run database migrations
-      run: bin/rails db:migrate
+- name: Run database migrations in ECS
+  run: |
+    aws ecs run-task --cluster twitter-clone-api-cluster --launch-type FARGATE --task-definition twitter-clone-api --overrides '{"containerOverrides":[{"name":"rails","command":["bundle","exec","rails","db:migrate"]}]}'
