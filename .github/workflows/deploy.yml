@@ -59,11 +59,3 @@ jobs:
         service: twitter-clone-api-service
         cluster: twitter-clone-api-cluster
 
-    - name: Install Ruby and gems
-      uses: ruby/setup-ruby@v1
-      with:
-        bundler-cache: true
-
-    - name: Run database migrations in ECS
-      run: |
-        aws ecs run-task --cluster twitter-clone-api-cluster --launch-type FARGATE --task-definition twitter-clone-api --overrides '{"containerOverrides":[{"name":"rails","command":["bundle","exec","rails","db:migrate"]}]}'
