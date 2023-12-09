@@ -3,11 +3,14 @@ name: Deploy to Amazon ECS
 on:
   push:
     branches:
-      - main
+      - development
 
 permissions:
   id-token: write
   contents: read
+
+env:
+  AWS_REGION: ap-northeast-1
 
 jobs:
   deploy:
@@ -16,18 +19,14 @@ jobs:
     environment: production
 
     steps:
-      - run: echo "Deploying to production"
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-    # steps:
-    # - name: Checkout
-    #   uses: actions/checkout@v2
-
-    # - name: Configure AWS credentials
-    #   uses: aws-actions/configure-aws-credentials@v1
-    #   with:
-    #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    #     aws-region: ap-northeast-1
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-region: ${{ env.AWS_REGION }}
+        role-to-assume: ${{ secrets.AWS_IAM_ROLE_ARN }}
 
     # - name: Login to Amazon ECR
     #   id: login-ecr
