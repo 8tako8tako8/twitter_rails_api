@@ -33,6 +33,8 @@ Rails.application.routes.draw do
       end
       resources :bookmarks, only: %i[index create], format: 'json'
       delete :bookmarks, to: 'bookmarks#destroy', format: 'json'
+
+      get :health_check, to: 'health_check#index'
     end
   end
 end

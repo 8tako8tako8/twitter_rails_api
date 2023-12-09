@@ -9,7 +9,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'http://localhost:3000', 'https://8tako8tako8.github.io'
+    origins 'http://localhost:3000', "https://#{ENV.fetch('FRONTEND_DOMAIN', nil)}"
 
     resource '*',
              headers: :any,

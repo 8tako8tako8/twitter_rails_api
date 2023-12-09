@@ -23,7 +23,7 @@ module Api
       end
 
       def user_session
-        if current_api_v1_user.deleted_at.present?
+        if current_api_v1_user&.deleted_at.present?
           render json: nil, status: :forbidden
           return
         end
