@@ -64,6 +64,6 @@ jobs:
       with:
         bundler-cache: true
 
-- name: Run database migrations in ECS
-  run: |
-    aws ecs run-task --cluster twitter-clone-api-cluster --launch-type FARGATE --task-definition twitter-clone-api --overrides '{"containerOverrides":[{"name":"rails","command":["bundle","exec","rails","db:migrate"]}]}'
+    - name: Run database migrations in ECS
+      run: |
+        aws ecs run-task --cluster twitter-clone-api-cluster --launch-type FARGATE --task-definition twitter-clone-api --overrides '{"containerOverrides":[{"name":"rails","command":["bundle","exec","rails","db:migrate"]}]}'
