@@ -57,3 +57,11 @@ jobs:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
         service: twitter-clone-api-service
         cluster: twitter-clone-api-cluster
+
+    - name: Install Ruby and gems
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+
+    - name: Run database migrations
+      run: bin/rails db:migrate
