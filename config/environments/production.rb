@@ -62,18 +62,18 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { host: ENV.fetch('BACKEND_DOMAIN'), protocl: 'https' }
+  config.action_mailer.default_url_options = { host: ENV.fetch('BACKEND_DOMAIN', nil), protocl: 'https' }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default charset: 'utf-8'
   config.action_mailer.smtp_settings = {
-    address: "email-smtp.#{ENV.fetch('AWS_REGION')}.amazonaws.com",
+    address: "email-smtp.#{ENV.fetch('AWS_REGION', 'ap-northeast-1')}.amazonaws.com",
     port: 587,
-    domain: ENV.fetch('FRONTEND_DOMAIN'),
+    domain: ENV.fetch('FRONTEND_DOMAIN', nil),
     authentication: :login,
-    user_name: ENV.fetch('SES_USERNAME'),
-    password: ENV.fetch('SES_PASSWORD')
+    user_name: ENV.fetch('SES_USERNAME', nil),
+    password: ENV.fetch('SES_PASSWORD', nil)
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
